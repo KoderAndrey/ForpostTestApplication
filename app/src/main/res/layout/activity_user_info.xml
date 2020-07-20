@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="userModel"
+            type="com.forpost.testapp.domain.model.UserModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.userinfo.UserInfoActivity">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageUser"
+            android:layout_width="@dimen/size_user_photo"
+            android:layout_height="@dimen/size_user_photo"
+            android:layout_margin="@dimen/margin_user_info"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_user_info"
+            android:text='@{userModel.name + " "+ userModel.lastName +", age " + userModel.age}'
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_user_info_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageUser" />
+
+        <TextView
+            android:id="@+id/mailUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{userModel.email}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_info"
+            app:layout_constraintBottom_toBottomOf="@+id/mailUserInfo"
+            app:layout_constraintStart_toEndOf="@+id/mailUserInfo"
+            app:layout_constraintTop_toTopOf="@+id/mailUserInfo" />
+
+        <TextView
+            android:id="@+id/mailUserInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_user_info"
+            android:layout_marginTop="@dimen/margin_user_item"
+            android:text="@string/email"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameUser" />
+
+        <TextView
+            android:id="@+id/numberUserInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_user_info"
+            android:layout_marginTop="@dimen/margin_user_item"
+            android:text="@string/phone_number"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mailUserInfo" />
+
+        <TextView
+            android:id="@+id/numberUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{userModel.phone}"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_info"
+            app:layout_constraintBottom_toBottomOf="@+id/numberUserInfo"
+            app:layout_constraintStart_toEndOf="@id/numberUserInfo"
+            app:layout_constraintTop_toTopOf="@+id/numberUserInfo" />
+
+        <TextView
+            android:id="@+id/addressUserInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_user_info"
+            android:layout_marginTop="@dimen/margin_user_item"
+            android:text="@string/address"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numberUserInfo" />
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"country: " + userModel.country}'
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_info"
+            app:layout_constraintBottom_toBottomOf="@+id/addressUserInfo"
+            app:layout_constraintStart_toEndOf="@+id/addressUserInfo"
+            app:layout_constraintTop_toTopOf="@+id/addressUserInfo" />
+
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"state: " + userModel.state}'
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_info"
+            app:layout_constraintStart_toEndOf="@+id/addressUserInfo"
+            app:layout_constraintTop_toBottomOf="@+id/country" />
+
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"city: " + userModel.city}'
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_info"
+            app:layout_constraintStart_toEndOf="@+id/addressUserInfo"
+            app:layout_constraintTop_toBottomOf="@+id/state" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
