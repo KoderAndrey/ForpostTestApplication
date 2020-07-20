@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(), UserListAdapter.OnCLickUser {
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = model
+        binding.lifecycleOwner = this
         model.getUsers()
         initUI()
         observeData()
@@ -34,9 +35,6 @@ class MainActivity : AppCompatActivity(), UserListAdapter.OnCLickUser {
     }
 
     private fun observeData() {
-        model.userData().observe(this, Observer { userList ->
-            adapter.setItems(userList)
-        })
         model.error().observe(this, Observer { errorMessage ->
             Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
         })

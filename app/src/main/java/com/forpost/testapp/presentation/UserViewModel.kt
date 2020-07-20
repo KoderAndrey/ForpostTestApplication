@@ -1,8 +1,5 @@
 package com.forpost.testapp.presentation
 
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.forpost.testapp.domain.model.UserModel
@@ -23,25 +20,24 @@ class UserViewModel(private val userUseCase: UserListUseCase) : ViewModel(), Koi
 
     private val viewModelJob = Job()
     private val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val usersData: MutableLiveData<List<UserModel>> = MutableLiveData()
+    val usersData: MutableLiveData<List<UserModel>> = MutableLiveData()
     private val errorData: LiveEvent<String> = LiveEvent()
-    val isLoad: ObservableInt = ObservableInt(GONE)
+    val isLoad: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun getUsers() {
         viewModelScope.launch {
             try {
-                isLoad.set(VISIBLE)
+                isLoad.postValue(true)
                 userUseCase.getUsers().run {
-                    usersData.value = this
-                    isLoad.set(GONE)
+                    usersData.postValue(this)
+                    isLoad.postValue(false)
                 }
             } catch (e: Exception) {
                 errorData.postValue(ERROR + e.message)
-                isLoad.set(GONE)
+                isLoad.postValue(true)
             }
         }
     }
 
-    fun userData() = usersData
     fun error() = errorData
 }
